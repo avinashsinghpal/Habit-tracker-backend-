@@ -20,7 +20,7 @@ app.use(helmet());
 
 // ─── CORS Configuration ──────────────────────────────────────────────────────
 const allowedOrigins = [
-  "https://habit-tracker-frontend-six-lake.vercel.app",
+  "https://habit-tracker-frontend-six-lake.vercel.app", "https://habit-tracker-frontend-six-lake.vercel.app"
 ];
 
 const corsOptions = {
