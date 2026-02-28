@@ -23,9 +23,12 @@ app.use(helmet());
 // CORS_ORIGIN=https://habit-tracker-frontend-six-lake.vercel.app
 // or multiple origins separated by comma
 
-const allowedOrigins = process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(",").map((origin) => origin.trim())
-  : [];
+const allowedOrigins = [
+  "https://habit-tracker-frontend-six-lake.vercel.app",
+  ...(process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(",").map((o) => o.trim())
+    : []),
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -88,8 +91,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(
-    `🚀 Server running on port ${PORT} in ${
-      process.env.NODE_ENV || "development"
+    `🚀 Server running on port ${PORT} in ${process.env.NODE_ENV || "development"
     } mode`
   );
 });
