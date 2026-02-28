@@ -17,7 +17,23 @@ const app = express();
 
 // ─── Global Middleware ────────────────────────────────────────────────────────
 app.use(helmet());
-app.use(cors());
+// ─── CORS ─────────────────────────────────────────────────────────────────────
+// Set CORS_ORIGIN in .env as a comma-separated list of allowed origins.
+// e.g.  CORS_ORIGIN=https://myapp.vercel.app,http://localhost:5173
+// Leave unset (or use *) to allow all origins (development default).
+const rawOrigins = process.env.CORS_ORIGIN;
+const corsOrigins = rawOrigins
+    ? rawOrigins.split(',').map((o) => o.trim()).filter(Boolean)
+    : '*';
+
+app.use(
+    cors({
+        origin: corsOrigins,
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: corsOrigins !== '*', // credentials only work with explicit origins
+    })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
