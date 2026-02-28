@@ -19,15 +19,8 @@ const app = express();
 app.use(helmet());
 
 // ─── CORS Configuration ──────────────────────────────────────────────────────
-// In your .env (Render), set:
-// CORS_ORIGIN=https://habit-tracker-frontend-six-lake.vercel.app
-// or multiple origins separated by comma
-
 const allowedOrigins = [
   "https://habit-tracker-frontend-six-lake.vercel.app",
-  ...(process.env.CORS_ORIGIN
-    ? process.env.CORS_ORIGIN.split(",").map((o) => o.trim())
-    : []),
 ];
 
 const corsOptions = {
